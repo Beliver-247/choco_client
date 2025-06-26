@@ -5,11 +5,12 @@ const AddEntryForm = () => {
   const [member, setMember] = useState("");
   const [type, setType] = useState("");
   const [quantity, setQuantity] = useState(1);
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/logs", { member, type, quantity });
+      axios.post(`${baseUrl}/api/logs`, { member, type, quantity });
       alert("Entry added!");
       setMember("");
       setType("");

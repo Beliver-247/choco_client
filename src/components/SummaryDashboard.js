@@ -3,10 +3,11 @@ import axios from "axios";
 
 const SummaryDashboard = () => {
   const [summary, setSummary] = useState(null);
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
   const TOTAL_CHOCOLATES = 60;
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/logs/summary").then((res) => setSummary(res.data));
+    axios.get(`${baseUrl}/api/logs`).then((res) => setSummary(res.data));
   }, []);
 
   if (!summary) return <p>Loading summary...</p>;
