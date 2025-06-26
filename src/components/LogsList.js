@@ -5,21 +5,26 @@ const LogsList = () => {
   const [logs, setLogs] = useState([]);
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
-
   useEffect(() => {
-    axios.get(`${baseUrl}/api/logs`).then((res) => setLogs(res.data));
+    axios.get(`${baseUrl}/api/logs`)
+      .then((res) => setLogs(res.data))
+      .catch((err) => console.error("Error fetching logs:", err));
   }, []);
 
   return (
     <div>
       <h3>Logs</h3>
-      <ul>
-        {logs.map((log, index) => (
-          <li key={index}>
-            {log.member} took {log.quantity} {log.type} chocolate(s) on {new Date(log.timestamp).toLocaleString()}
-          </li>
-        ))}
-      </ul>
+      {logs.length === 0 ? (
+        <p>No chocolate logs yet.</p>
+      ) : (
+        <ul>
+          {logs.map((log, index) => (
+            <li key={index}>
+              {log.member} took {log.quantity} {log.type} chocolate(s) on {new Date(log.timestamp).toLocaleString()}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

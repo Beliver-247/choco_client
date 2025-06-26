@@ -7,7 +7,9 @@ const SummaryDashboard = () => {
   const TOTAL_CHOCOLATES = 60;
 
   useEffect(() => {
-    axios.get(`${baseUrl}/api/logs`).then((res) => setSummary(res.data));
+    axios.get(`${baseUrl}/api/logs/summary`)
+      .then((res) => setSummary(res.data))
+      .catch((err) => console.error("Failed to fetch summary:", err));
   }, []);
 
   if (!summary) return <p>Loading summary...</p>;

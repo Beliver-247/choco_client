@@ -10,12 +10,13 @@ const AddEntryForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      axios.post(`${baseUrl}/api/logs`, { member, type, quantity });
+      await axios.post(`${baseUrl}/api/logs`, { member, type, quantity });
       alert("Entry added!");
       setMember("");
       setType("");
       setQuantity(1);
     } catch (err) {
+      console.error("Failed to add entry:", err);
       alert("Error adding entry");
     }
   };
@@ -39,7 +40,13 @@ const AddEntryForm = () => {
         <option value="almond">Almond</option>
         <option value="coffee crisp">Coffee Crisp</option>
       </select>
-      <input type="number" min="1" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+      <input
+        type="number"
+        min="1"
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
+        required
+      />
       <button type="submit">Add Entry</button>
     </form>
   );
