@@ -22,8 +22,18 @@ const AddEntryForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
-      <select value={member} onChange={(e) => setMember(e.target.value)} required>
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto mb-6"
+    >
+      <h2 className="text-xl font-semibold mb-4 text-center">Add Chocolate Entry</h2>
+
+      <select
+        value={member}
+        onChange={(e) => setMember(e.target.value)}
+        required
+        className="w-full p-2 mb-3 border border-gray-300 rounded"
+      >
         <option value="">Select Member</option>
         <option value="younger brother">Younger Brother</option>
         <option value="elder brother">Elder Brother</option>
@@ -31,7 +41,13 @@ const AddEntryForm = () => {
         <option value="father">Father</option>
         <option value="grandma">Grandma</option>
       </select>
-      <select value={type} onChange={(e) => setType(e.target.value)} required>
+
+      <select
+        value={type}
+        onChange={(e) => setType(e.target.value)}
+        required
+        className="w-full p-2 mb-3 border border-gray-300 rounded"
+      >
         <option value="">Select Chocolate</option>
         <option value="orange">Orange</option>
         <option value="classic">Classic</option>
@@ -40,14 +56,23 @@ const AddEntryForm = () => {
         <option value="almond">Almond</option>
         <option value="coffee crisp">Coffee Crisp</option>
       </select>
+
       <input
         type="number"
         min="1"
         value={quantity}
         onChange={(e) => setQuantity(Number(e.target.value))}
         required
+        className="w-full p-2 mb-3 border border-gray-300 rounded"
+        placeholder="Quantity"
       />
-      <button type="submit">Add Entry</button>
+
+      <button
+        type="submit"
+        className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+      >
+        Add Entry
+      </button>
     </form>
   );
 };

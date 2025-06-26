@@ -6,21 +6,27 @@ const LogsList = () => {
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
-    axios.get(`${baseUrl}/api/logs`)
+    axios
+      .get(`${baseUrl}/api/logs`)
       .then((res) => setLogs(res.data))
       .catch((err) => console.error("Error fetching logs:", err));
   }, []);
 
   return (
-    <div>
-      <h3>Logs</h3>
+    <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-lg font-semibold mb-4 text-center">Chocolate Logs</h2>
       {logs.length === 0 ? (
-        <p>No chocolate logs yet.</p>
+        <p className="text-gray-500 text-center">No chocolate logs yet.</p>
       ) : (
-        <ul>
+        <ul className="space-y-2">
           {logs.map((log, index) => (
-            <li key={index}>
-              {log.member} took {log.quantity} {log.type} chocolate(s) on {new Date(log.timestamp).toLocaleString()}
+            <li key={index} className="p-3 bg-gray-100 rounded shadow-sm">
+              <span className="font-medium capitalize">{log.member}</span> took{" "}
+              <span className="font-semibold">{log.quantity}</span>{" "}
+              <span className="capitalize">{log.type}</span> chocolate(s) on{" "}
+              <span className="text-sm text-gray-600">
+                {new Date(log.timestamp).toLocaleString()}
+              </span>
             </li>
           ))}
         </ul>
