@@ -11,13 +11,18 @@ const AddEntryForm = () => {
     e.preventDefault();
     try {
       await axios.post(`${baseUrl}/api/logs`, { member, type, quantity });
-      alert("Entry added!");
+      alert("Entry added successfully!");
       setMember("");
       setType("");
       setQuantity(1);
+      window.location.reload(); // Refresh the page after successful submission
     } catch (err) {
       console.error("Failed to add entry:", err);
-      alert("Error adding entry");
+      if (err.response?.data?.error?.includes("chocolate limit of 12")) {
+        alert("Error: Member has reached their chocolate limit of 12!");
+      } else {
+        alert("Error adding entry");
+      }
     }
   };
 
